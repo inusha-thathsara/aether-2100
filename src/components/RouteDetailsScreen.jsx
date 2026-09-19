@@ -14,7 +14,8 @@ import {
   Ticket, 
   Volume2, 
   Sparkles,
-  Accessibility
+  Accessibility,
+  ArrowUpRight
 } from 'lucide-react';
 import { audioManager } from '../utils/audioCues';
 
@@ -24,7 +25,7 @@ export function RouteDetailsScreen({
   isPlainLanguage, 
   setIsPassModalOpen 
 }) {
-  const getModeIcon = (modeId, size = 16) => {
+  const getModeIcon = (modeId, size = 18) => {
     switch (modeId) {
       case 'bus': return <Bus size={size} />;
       case 'train': return <Train size={size} />;
@@ -36,52 +37,52 @@ export function RouteDetailsScreen({
 
   const getModeColor = (modeId) => {
     switch (modeId) {
-      case 'bus': return 'var(--cyan-primary)';
-      case 'train': return 'var(--emerald-accent)';
-      case 'air': return 'var(--amber-warning)';
-      case 'road': return '#d946ef';
-      default: return 'var(--cyan-primary)';
+      case 'bus': return 'var(--teal-glow)';
+      case 'train': return 'var(--emerald-active)';
+      case 'air': return 'var(--solar-amber)';
+      case 'road': return 'var(--violet-iris)';
+      default: return 'var(--teal-glow)';
     }
   };
 
   const handleLaunchTracking = () => {
     audioManager.playChime('arrival');
-    setActiveTab('tracking'); // Switch to Screen 3
+    setActiveTab('tracking');
   };
 
   const speakSummary = () => {
     const text = isPlainLanguage
       ? `This route takes ${selectedRoute.totalDuration}. ${selectedRoute.plainSummary}`
-      : `Your multi-modal route from ${selectedRoute.from} to ${selectedRoute.to} is on schedule. Total travel time is ${selectedRoute.totalDuration}. All transfer hubs feature full step-free accessibility.`;
+      : `Your multi-modal corridor from ${selectedRoute.from} to ${selectedRoute.to} is on schedule. Total duration is ${selectedRoute.totalDuration}. All interchanges feature automated step-free boarding ramps.`;
     audioManager.speak(text);
   };
 
   return (
     <div className="screen-content" role="region" aria-label="Route and Journey Details">
-      {/* Screen 2 Hero Summary Card (Clear Information Hierarchy) */}
+      {/* Screen 2 Hero Summary Card (High Information Hierarchy) */}
       <section className="route-hero-card">
         <div className="route-hero-top">
           <span className="route-tag-pill">{selectedRoute.name}</span>
-          <div className={`route-delay-status ${selectedRoute.statusType || 'normal'}`}>
-            <CheckCircle2 size={14} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--emerald-active)', fontSize: '0.78rem', fontWeight: 700 }}>
+            <CheckCircle2 size={15} />
             <span>{selectedRoute.status}</span>
           </div>
         </div>
 
         <div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-hud)' }}>
-            Total Travel Time
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-data)', fontWeight: 600 }}>
+            Total Journey Duration
           </div>
-          <div className="route-duration-display">
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginTop: '2px' }}>
             <span className="duration-big">{selectedRoute.totalDuration}</span>
-            <span className="duration-sub">• {selectedRoute.totalDistance} total</span>
+            <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>• {selectedRoute.totalDistance} total</span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', fontWeight: 600 }}>
-          <MapPin size={16} color="var(--cyan-primary)" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-pure)' }}>
+          <MapPin size={18} color="var(--teal-glow)" />
           <span>{selectedRoute.from}</span>
-          <ArrowRight size={14} color="var(--text-dim)" />
+          <ArrowRight size={16} color="var(--text-dim)" />
           <span>{selectedRoute.to}</span>
         </div>
 
@@ -89,10 +90,10 @@ export function RouteDetailsScreen({
         <div className="route-meta-strip">
           <div className="meta-item">
             <span className="meta-item-label">Crowd Density</span>
-            <span className="meta-item-val" style={{ color: 'var(--emerald-accent)' }}>Low (32%)</span>
+            <span className="meta-item-val" style={{ color: 'var(--emerald-active)' }}>Low (32%)</span>
           </div>
           <div className="meta-item">
-            <span className="meta-item-label">Energy / Carbon</span>
+            <span className="meta-item-label">Clean Energy</span>
             <span className="meta-item-val">0.0 kg CO2</span>
           </div>
           <div className="meta-item">
@@ -108,39 +109,39 @@ export function RouteDetailsScreen({
           type="button" 
           className="btn-secondary-hud" 
           onClick={speakSummary}
-          style={{ width: '100%', fontSize: '0.75rem', padding: '8px 12px' }}
-          aria-label="Read journey details aloud"
+          style={{ width: '100%', fontSize: '0.8rem', padding: '10px 14px' }}
+          aria-label="Read journey overview aloud"
         >
-          <Volume2 size={16} /> Listen to Journey Overview
+          <Volume2 size={16} /> Listen to Journey Briefing
         </button>
       </section>
 
-      {/* Real-Time Delay & Corridor Update */}
+      {/* Real-Time Air & Ground Corridor Safety Box */}
       <section 
         className="card-hud" 
         style={{ 
-          background: 'rgba(0, 255, 157, 0.06)', 
-          border: '1px solid var(--emerald-accent)',
-          padding: '12px 14px' 
+          background: 'rgba(16, 185, 129, 0.08)', 
+          border: '1px solid rgba(16, 185, 129, 0.3)',
+          padding: '14px 18px' 
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--emerald-accent)', fontWeight: 700, fontFamily: 'var(--font-hud)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: 'var(--emerald-active)', fontWeight: 700, fontFamily: 'var(--font-data)' }}>
           <AlertCircle size={16} />
-          <span>REAL-TIME CORRIDOR STATUS: ALL SECTORS CLEAR</span>
+          <span>ORACLE SYSTEM: ALL CORRIDORS SYNCHRONIZED</span>
         </div>
-        <p style={{ fontSize: '0.76rem', color: 'var(--text-main)', marginTop: '4px', lineHeight: 1.4 }}>
+        <p style={{ fontSize: '0.78rem', color: 'var(--text-lead)', marginTop: '4px', lineHeight: 1.45, margin: '4px 0 0' }}>
           {isPlainLanguage
-            ? "Everything is running on time. Transfer platforms have clear automatic signs and step-free access."
-            : "Surface inductive grids running at 100% capacity. Upper flight corridors have zero atmospheric shear."}
+            ? "Your journey is running on time. All transfer gates have automatic ramps and audio guides."
+            : "Dynamic atmospheric shear is nominal. Inductive surface power grid synced at 99.98%."}
         </p>
       </section>
 
       {/* Multi-Modal Journey Legs Timeline */}
-      <section aria-label="Step by step travel legs">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <h2 className="hubs-slider-title">Multi-Modal Journey Timeline</h2>
-          <span style={{ fontSize: '0.7rem', color: 'var(--cyan-primary)', fontFamily: 'var(--font-mono)' }}>
-            AUTO-SYNCED
+      <section aria-label="Journey Legs Timeline">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+          <span className="elevation-title">Multi-Modal Journey Timeline</span>
+          <span style={{ fontSize: '0.72rem', color: 'var(--teal-glow)', fontFamily: 'var(--font-mono)' }}>
+            AUTOMATED TRANSFERS
           </span>
         </div>
 
@@ -149,16 +150,16 @@ export function RouteDetailsScreen({
             if (leg.isTransfer) {
               return (
                 <div key={`transfer-${index}`} className="transfer-card" role="region" aria-label={`Transfer: ${leg.title}`}>
-                  <Footprints size={20} color="var(--amber-warning)" style={{ flexShrink: 0 }} />
+                  <Footprints size={22} color="var(--solar-amber)" style={{ flexShrink: 0 }} />
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--amber-warning)' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--solar-amber)' }}>
                       {leg.title} ({leg.duration})
                     </div>
-                    <div style={{ fontSize: '0.74rem', color: 'var(--text-main)', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-lead)', marginTop: '3px' }}>
                       {isPlainLanguage ? leg.plainInstruction : leg.instruction}
                     </div>
-                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Accessibility size={12} color="var(--emerald-accent)" />
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Accessibility size={13} color="var(--emerald-active)" />
                       <span>{leg.distance} • Level-access moving walkway</span>
                     </div>
                   </div>
@@ -171,38 +172,40 @@ export function RouteDetailsScreen({
             return (
               <div key={`leg-${leg.legNumber}`} className="leg-card" role="region" aria-label={`Leg ${leg.legNumber}: ${leg.modeName}`}>
                 {/* Leg Header */}
-                <div className="leg-header">
-                  <div className="leg-mode-badge" style={{ color: modeColor }}>
-                    {getModeIcon(leg.mode, 16)}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: modeColor, fontWeight: 700, fontSize: '0.82rem' }}>
+                    {getModeIcon(leg.mode, 18)}
                     <span>{leg.modeName}</span>
                   </div>
-                  <div className="leg-time-tag">
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                     {leg.departureTime} – {leg.arrivalTime} ({leg.duration})
                   </div>
                 </div>
 
                 {/* Stations */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <div className="leg-stop-title">{leg.from} ➔ {leg.to}</div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                    Distance: {leg.distance} • Telemetry: {leg.telemetry?.speed || '100 km/h'}
+                <div>
+                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-pure)' }}>
+                    {leg.from} ➔ {leg.to}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                    Distance: {leg.distance} • Speed: {leg.telemetry?.speed || '100 km/h'}
                   </div>
                 </div>
 
-                {/* Critical Information: Boarding Bay / Gate */}
+                {/* Critical Boarding Gate / Bay */}
                 <div className="leg-gate-highlight">
                   <MapPin size={14} />
                   <span>Boarding at: <strong>{leg.gate}</strong></span>
                 </div>
 
                 {/* Plain-Language Guidance for First-Time / Elderly Users */}
-                <div style={{ fontSize: '0.78rem', color: '#e0f2fe', background: 'rgba(0,0,0,0.3)', padding: '6px 8px', borderRadius: '6px' }}>
+                <div style={{ fontSize: '0.8rem', color: '#e2e8f0', background: 'rgba(0,0,0,0.35)', padding: '8px 12px', borderRadius: '8px', borderLeft: '3px solid var(--teal-glow)' }}>
                   💡 {leg.plainInstruction}
                 </div>
 
-                {/* Accessibility Details */}
-                <div className="leg-accessibility-row">
-                  <Accessibility size={14} color="var(--emerald-accent)" />
+                {/* Step-Free & Accessibility Notes */}
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: '8px' }}>
+                  <Accessibility size={14} color="var(--emerald-active)" />
                   <span>{leg.accessibilityNote}</span>
                 </div>
               </div>
@@ -212,15 +215,15 @@ export function RouteDetailsScreen({
       </section>
 
       {/* Primary Action Buttons */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '6px' }}>
+      <section style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
         <button
           type="button"
           className="btn-primary-hud"
           onClick={handleLaunchTracking}
           id="btn-launch-tracking"
         >
-          <Radio size={18} />
-          <span>Launch Live Map & Tracking HUD ➔</span>
+          <Radio size={19} />
+          <span>Launch Live 3D Tracking HUD ➔</span>
         </button>
 
         <button
@@ -233,7 +236,7 @@ export function RouteDetailsScreen({
           id="btn-open-ticket"
         >
           <Ticket size={18} />
-          <span>View Biometric Boarding Pass</span>
+          <span>View Holographic Boarding Pass</span>
         </button>
       </section>
     </div>

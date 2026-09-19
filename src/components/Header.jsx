@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eye, Volume2, VolumeX, Ticket, Sparkles } from 'lucide-react';
+import { Eye, Volume2, VolumeX, Ticket, Compass } from 'lucide-react';
 import { audioManager } from '../utils/audioCues';
 
 export function Header({
@@ -24,9 +24,9 @@ export function Header({
       <div className="header-status-ticker">
         <div className="pulse-pill">
           <span className="pulse-dot" aria-hidden="true"></span>
-          <span>ORACLE GRID 2100 • ONLINE</span>
+          <span>NEO-METROPOLIS • SECTOR 04 ACTIVE</span>
         </div>
-        <span className="team-tag">TEAM: IT GUNASEKARA</span>
+        <span className="team-tag">CRE8X • IT GUNASEKARA</span>
       </div>
 
       <div className="header-main-bar">
@@ -36,16 +36,16 @@ export function Header({
           title="Aether 2100 Smart Transit Network"
         >
           <div className="brand-logo-glow">
-            <Sparkles size={20} color="var(--cyan-primary)" />
+            <Compass size={24} color="#00f2fe" strokeWidth={2.4} />
           </div>
           <div className="brand-titles">
-            <h1>AETHER 2100</h1>
-            <div className="author-tag">BCS CRE8X 3.0 • IT GUNASEKARA</div>
+            <h1>AETHER <span className="accent-num">2100</span></h1>
+            <div className="author-tag">Autonomous Mobility Network</div>
           </div>
         </div>
 
         <div className="header-action-group">
-          {/* Quick Accessibility Config */}
+          {/* Universal Accessibility */}
           <button 
             type="button"
             className={`btn-icon-hud ${accessibilityMode ? 'active' : ''}`}
@@ -53,24 +53,24 @@ export function Header({
               audioManager.playChime('click');
               setIsAccessibilityModalOpen(true);
             }}
-            title="Accessibility Settings (High Contrast, Large Text, Plain Language)"
-            aria-label="Open Accessibility Menu"
+            title="Accessibility & Plain Language Preferences"
+            aria-label="Accessibility options"
           >
-            <Eye size={18} />
+            <Eye size={19} />
           </button>
 
-          {/* Audio Feedback Toggle */}
+          {/* Audio Chime Feedback */}
           <button
             type="button"
             className="btn-icon-hud"
             onClick={toggleSound}
-            title={audioEnabled ? 'Mute Futuristic Audio Cues' : 'Enable Audio Feedback'}
-            aria-label="Toggle Audio Sound"
+            title={audioEnabled ? 'Mute Spatial Audio' : 'Enable Spatial Audio'}
+            aria-label="Toggle audio feedback"
           >
-            {audioEnabled ? <Volume2 size={18} /> : <VolumeX size={18} color="var(--text-dim)" />}
+            {audioEnabled ? <Volume2 size={19} /> : <VolumeX size={19} color="var(--text-dim)" />}
           </button>
 
-          {/* Biometric Ticket / Boarding Pass */}
+          {/* Holographic Biometric Ticket */}
           <button
             type="button"
             className="btn-icon-hud"
@@ -78,10 +78,10 @@ export function Header({
               audioManager.playChime('arrival');
               setIsPassModalOpen(true);
             }}
-            title="View 2100 Holographic Boarding Pass"
-            aria-label="Open Biometric Boarding Pass"
+            title="View Holographic Boarding Pass"
+            aria-label="View biometric pass"
           >
-            <Ticket size={18} />
+            <Ticket size={19} />
           </button>
         </div>
       </div>
