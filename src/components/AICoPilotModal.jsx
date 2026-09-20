@@ -70,7 +70,7 @@ export function AICoPilotModal({ isOpen, onClose }) {
         </div>
 
         {/* Quick prompt suggestions */}
-        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px' }}>
+        <div className="copilot-quick-prompts">
           {quickQuestions.map((q, idx) => (
             <button
               key={idx}
@@ -85,7 +85,7 @@ export function AICoPilotModal({ isOpen, onClose }) {
         </div>
 
         {/* Chat message history */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '280px', overflowY: 'auto', paddingRight: '4px' }}>
+        <div className="copilot-chat-history">
           {messages.map((m, idx) => (
             <div
               key={idx}
