@@ -29,7 +29,14 @@ import { audioManager } from './utils/audioCues';
 import { PRESET_ROUTES } from './data/transitNetwork';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'route' | 'tracking'
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab === 'home' || tab === 'route' || tab === 'tracking') return tab;
+    }
+    return 'home';
+  });
   const [selectedMode, setSelectedMode] = useState('air');
   const [selectedDestination, setSelectedDestination] = useState('Future City Hub');
   const [isAccessibilityView, setIsAccessibilityView] = useState(false);
@@ -44,7 +51,12 @@ export function App() {
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
   const [isNearbyOpen, setIsNearbyOpen] = useState(false);
   const [isCoPilotOpen, setIsCoPilotOpen] = useState(false);
-  const [isPassOpen, setIsPassOpen] = useState(false);
+  const [isPassOpen, setIsPassOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return new URLSearchParams(window.location.search).get('modal') === 'pass';
+    }
+    return false;
+  });
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
 

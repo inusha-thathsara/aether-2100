@@ -27,12 +27,12 @@ export function BoardingPassModal({ isOpen, onClose, selectedRoute }) {
         <div className="pass-hologram-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span className="route-tag-pill">2100 TRANSIT TOKEN</span>
+              <span className="route-tag-pill">2100 TRANSIT TOKEN • TEAM MIT GUNASEKARA</span>
               <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', marginTop: '6px' }}>
-                IT GUNASEKARA
+                INUSHA GUNASEKARA
               </div>
               <div style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', color: 'var(--cyan-primary)' }}>
-                PASSENGER ID: ORACLE-2100-ITG-8821
+                PASSENGER ID: ORACLE-2100-MITG-8821
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>

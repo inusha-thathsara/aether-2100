@@ -2,7 +2,8 @@
 
 **Cre8x 3.0: The Oracle Challenge (Round 01 - Mini Task)**  
 **Organized by:** BCS Student Chapter, General Sir John Kotelawala Defence University (KDU)  
-**Participant / Team Name:** `IT Gunasekara`  
+**Registered Team Name:** `MIT Gunasekara`  
+**Participant / Lead Designer:** `Inusha Gunasekara`  
 **Topic:** Transportation 2100  
 
 ---
@@ -34,7 +35,7 @@ Cre8x 3.0 heavily evaluates genuine accessibility (15 pts accessibility + 20 pts
 - **Screen 1 (Discovery & Home):** Multi-modal transit mode selector, Quantum Route Planner, Oracle AI Predictive advisory card, and instant hub presets.
 - **Screen 2 (Journey Details):** Multi-modal itinerary timeline, critical transfer gates/platforms callout, step-free elevator instructions, and live delay telemetry.
 - **Screen 3 (Live Map Tracking HUD):** Real-time vector map with animated vehicle position and radar wave pulses, speedometer, altitude, inductive grid sync, and the **Plain-Language Status Card** specifically tailored for non-map users.
-- **Bonus Feature:** Universal Biometric Boarding Pass with dynamic holographic QR verification for participant `IT Gunasekara`.
+- **Bonus Feature:** Universal Biometric Boarding Pass with dynamic holographic QR verification for passenger `Inusha Gunasekara` (`Team MIT Gunasekara`).
 
 ---
 
@@ -60,4 +61,4 @@ npm run build
 
 ## 📄 Submission Report
 The official 6-page evaluation PDF is compiled and available in this repository:
-- `IT_Gunasekara.pdf`
+- `MIT_Gunasekara.pdf`

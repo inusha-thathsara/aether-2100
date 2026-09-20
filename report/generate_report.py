@@ -24,7 +24,7 @@ html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cre8x 3.0 Report - IT Gunasekara</title>
+<title>Cre8x 3.0 Report - Team MIT Gunasekara</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -221,8 +221,9 @@ html_content = f"""<!DOCTYPE html>
   <div class="hero-box">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px;">
       <div>
-        <div style="color: #64748b; font-size: 10px; text-transform: uppercase;">Team / Participant Name</div>
-        <div style="font-size: 15px; font-weight: 800; color: #ffffff;">IT Gunasekara</div>
+        <div style="color: #64748b; font-size: 10px; text-transform: uppercase;">Team / Registered Participant</div>
+        <div style="font-size: 15px; font-weight: 800; color: #ffffff;">MIT Gunasekara</div>
+        <div style="font-size: 11px; color: #00f0ff; font-weight: 600; margin-top: 2px;">Lead Designer: Inusha Gunasekara</div>
       </div>
       <div>
         <div style="color: #64748b; font-size: 10px; text-transform: uppercase;">Competition Round</div>
@@ -275,12 +276,12 @@ html_content = f"""<!DOCTYPE html>
     </div>
     <div class="card-item">
       <div style="font-size: 11px; font-weight: 700; color: #00f0ff;">Page 5 & 6: Screen 2 & 3 Walkthroughs</div>
-      <div style="font-size: 10.5px; color: #94a3b8;">Journey details, transfer gate navigation, live vector map HUD, and evaluation scoring.</div>
+      <div style="font-size: 10.5px; color: #94a3b8;">Journey details, transfer gate navigation, live vector map HUD, and project conclusion.</div>
     </div>
   </div>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 1 OF 6</span>
   </div>
 </div>
@@ -351,7 +352,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 2 OF 6</span>
   </div>
 </div>
@@ -429,7 +430,7 @@ html_content = f"""<!DOCTYPE html>
   </p>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 3 OF 6</span>
   </div>
 </div>
@@ -501,7 +502,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 4 OF 6</span>
   </div>
 </div>
@@ -573,7 +574,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 5 OF 6</span>
   </div>
 </div>
@@ -590,98 +591,56 @@ html_content = f"""<!DOCTYPE html>
     <strong>Evaluation Focus:</strong> Real-time visual vehicle tracking through a map-based interface, clearly communicating status even to users completely unfamiliar with maps.
   </p>
 
-  <div style="display: grid; grid-template-columns: 190px 190px 1fr; gap: 14px; align-items: start; margin-top: 8px;">
+  <div style="display: grid; grid-template-columns: 215px 215px 1fr; gap: 16px; align-items: start; margin-top: 10px; margin-bottom: 14px;">
     <div>
-      <img src="{screen3_b64}" class="screenshot-frame" style="width: 190px;" alt="Screen 3 - Live Map Tracking">
-      <div style="text-align: center; font-size: 8.5px; color: #64748b; margin-top: 4px; font-family: 'Orbitron', monospace;">
+      <img src="{screen3_b64}" class="screenshot-frame" style="width: 215px;" alt="Screen 3 - Live Map Tracking">
+      <div style="text-align: center; font-size: 8.5px; color: #64748b; margin-top: 5px; font-family: 'Orbitron', monospace;">
         FIG 3: SCREEN 3 (LIVE MAP HUD)
       </div>
     </div>
 
     <div>
-      <img src="{pass_b64}" class="screenshot-frame" style="width: 190px;" alt="Bonus - Biometric Pass">
-      <div style="text-align: center; font-size: 8.5px; color: #64748b; margin-top: 4px; font-family: 'Orbitron', monospace;">
+      <img src="{pass_b64}" class="screenshot-frame" style="width: 215px;" alt="Bonus - Biometric Pass">
+      <div style="text-align: center; font-size: 8.5px; color: #64748b; margin-top: 5px; font-family: 'Orbitron', monospace;">
         FIG 4: BIOMETRIC PASS HUD
       </div>
     </div>
 
-    <div style="font-size: 10.5px;">
-      <div class="card-item" style="margin-bottom: 8px; padding: 8px;">
+    <div style="font-size: 11px;">
+      <div class="card-item" style="margin-bottom: 10px; padding: 10px;">
         <strong style="color: #00f0ff;">Interactive Vector Map:</strong>
-        <div style="color: #94a3b8;">Multi-layer SVG showing surface roads (magenta), sub-terran tubes (green), and aerial skyways (cyan). Features real-time animated vehicle position with radar pulse.</div>
+        <div style="color: #94a3b8; margin-top: 2px;">Multi-layer SVG showing surface roads, sub-terran vacuum tubes, and aerial skyways with animated vehicle position and radar pulse.</div>
       </div>
 
-      <div class="card-item" style="margin-bottom: 8px; padding: 8px;">
+      <div class="card-item" style="margin-bottom: 10px; padding: 10px;">
         <strong style="color: #00ff9d;">Plain-Language Status Card:</strong>
-        <div style="color: #94a3b8;">Directly addresses non-map users: <em>"Cruising aboard eVTOL Sky-Pod #SK-704... Arrival in 2 minutes. Prepare to exit on left."</em></div>
+        <div style="color: #94a3b8; margin-top: 2px;">Directly guides non-map users: <em>"Cruising aboard eVTOL Sky-Pod #SK-704... Arrival in 2 minutes. Prepare to exit on left."</em></div>
       </div>
 
-      <div class="card-item" style="padding: 8px;">
-        <strong style="color: #ffaa00;">Live Telemetry & SOS:</strong>
-        <div style="color: #94a3b8;">Real-time speedometer (218 km/h), altitude (+395m), 99.8% inductive sync, voice audio announcement, and one-tap SOS.</div>
+      <div class="card-item" style="padding: 10px;">
+        <strong style="color: #ffaa00;">Live Telemetry & Safety:</strong>
+        <div style="color: #94a3b8; margin-top: 2px;">Live speedometer (218 km/h), altitude (+395m), 99.8% inductive sync, synthetic voice guidance, and instant SOS.</div>
       </div>
     </div>
   </div>
 
-  <h2 style="margin-top: 14px;">10. Judging Criteria Self-Assessment (100 Points)</h2>
-  <table class="score-table">
-    <thead>
-      <tr>
-        <th>Evaluation Criteria</th>
-        <th>Pts</th>
-        <th>Implementation in Aether 2100</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Usability</strong></td>
-        <td>20</td>
-        <td>Frictionless 3-step navigation flow: Search ➔ Select Route ➔ Live Tracking. Thumb-dock controls.</td>
-      </tr>
-      <tr>
-        <td><strong>Aesthetics</strong></td>
-        <td>20</td>
-        <td>Cohesive 2100 cyber-HUD visual identity, Orbitron/Outfit typography, glassmorphism, dynamic glow.</td>
-      </tr>
-      <tr>
-        <td><strong>Innovation</strong></td>
-        <td>15</td>
-        <td>Oracle AI predictive routing, turbulence avoidance, biometric NFC pass for IT Gunasekara.</td>
-      </tr>
-      <tr>
-        <td><strong>Accessibility</strong></td>
-        <td>15</td>
-        <td>Dedicated Plain-Language Mode, WCAG AAA High Contrast, Web Audio chimes, TTS voice guidance, SOS.</td>
-      </tr>
-      <tr>
-        <td><strong>Functionality</strong></td>
-        <td>15</td>
-        <td>100% interactive React prototype with state management, simulated vector map, and working modals.</td>
-      </tr>
-      <tr>
-        <td><strong>Mobile Responsiveness</strong></td>
-        <td>15</td>
-        <td>Engineered mobile-first for all smartphone aspect ratios with zero layout breaks or text clipping.</td>
-      </tr>
-      <tr>
-        <td style="color: #00ff9d; font-weight: 800;">TOTAL SCORE</td>
-        <td style="color: #00ff9d; font-weight: 800;">100</td>
-        <td style="color: #00ff9d; font-weight: 700;">Fully Compliant with All Cre8x 3.0 Round 01 Guidelines</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="live-link-box" style="margin: 10px 0 0; padding: 8px 12px;">
-    <span style="font-size: 9.5px; color: #00ff9d; font-family: 'Orbitron', monospace; font-weight: 700;">
-      VERIFIED LIVE HOSTED URL:
-    </span>
-    <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #ffffff; margin-left: 6px;">
-      https://inusha-thathsara.github.io/aether-2100/
-    </span>
+  <h2>10. Conclusion & Vision for Transportation 2100</h2>
+  <p>
+    <strong>Aether 2100</strong> demonstrates that the future of metropolitan mobility does not require sacrificing human intuition. By synthesizing autonomous surface transit, subterranean hyperloop maglevs, aerial eVTOL corridors, and inductive smart roadways into a cohesive three-step interaction model, the platform eliminates urban congestion while remaining universally accessible to all generations.
+  </p>
+  <div class="grid-2" style="margin-top: 10px;">
+    <div class="card-item">
+      <div style="font-size: 11px; font-weight: 700; color: #00f0ff; margin-bottom: 3px;">Universal Inclusivity First</div>
+      <div style="font-size: 10.5px; color: #94a3b8;">High-contrast modes, dynamic typography scaling, voice audio synthesis, and plain-language assistance ensure no traveler is left behind in the autonomous era.</div>
+    </div>
+    <div class="card-item">
+      <div style="font-size: 11px; font-weight: 700; color: #00ff9d; margin-bottom: 3px;">Autonomous Quad-Modal Harmony</div>
+      <div style="font-size: 10.5px; color: #94a3b8;">Oracle AI synchronizes schedules, atmospheric turbulence forecasts, and dynamic transfers into a frictionless touchpoint with zero cognitive fatigue.</div>
+    </div>
   </div>
 
   <div class="page-footer">
-    <span>AETHER 2100 • IT GUNASEKARA</span>
+    <span>AETHER 2100 • TEAM MIT GUNASEKARA (INUSHA GUNASEKARA)</span>
     <span>PAGE 6 OF 6</span>
   </div>
 </div>
@@ -701,9 +660,9 @@ edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 if not os.path.exists(edge_path):
     edge_path = r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"
 
-pdf_output_path = os.path.join(BASE_DIR, "IT_Gunasekara.pdf")
-root_pdf_path = os.path.join(os.path.dirname(BASE_DIR), "IT_Gunasekara.pdf")
-root_space_pdf_path = os.path.join(os.path.dirname(BASE_DIR), "IT Gunasekara.pdf")
+pdf_output_path = os.path.join(BASE_DIR, "MIT_Gunasekara.pdf")
+root_pdf_path = os.path.join(os.path.dirname(BASE_DIR), "MIT_Gunasekara.pdf")
+root_space_pdf_path = os.path.join(os.path.dirname(BASE_DIR), "MIT Gunasekara.pdf")
 
 cmd = [
     edge_path,
@@ -722,6 +681,10 @@ if os.path.exists(pdf_output_path):
     print(f"Successfully generated {pdf_output_path} (Size: {os.path.getsize(pdf_output_path)} bytes)")
     shutil.copyfile(pdf_output_path, root_pdf_path)
     shutil.copyfile(pdf_output_path, root_space_pdf_path)
+    # Also maintain legacy aliases so no links break
+    shutil.copyfile(pdf_output_path, os.path.join(BASE_DIR, "IT_Gunasekara.pdf"))
+    shutil.copyfile(pdf_output_path, os.path.join(os.path.dirname(BASE_DIR), "IT_Gunasekara.pdf"))
+    shutil.copyfile(pdf_output_path, os.path.join(os.path.dirname(BASE_DIR), "IT Gunasekara.pdf"))
     print(f"Copied to root: {root_pdf_path} and {root_space_pdf_path}")
 else:
     print("Error: PDF output file was not created.")

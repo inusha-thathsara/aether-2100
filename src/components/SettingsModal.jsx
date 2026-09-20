@@ -191,7 +191,7 @@ export function SettingsModal({
         <div style={{ marginTop: '10px', background: 'rgba(255,255,255,0.04)', borderRadius: '12px', padding: '12px 14px', fontSize: '0.76rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <ShieldCheck size={18} color="var(--electric-cyan)" />
           <span>
-            Registered Passenger: <strong>IT Gunasekara</strong> • Universal Transit ID
+            Registered Passenger: <strong>Inusha Gunasekara</strong> (Team: <strong>MIT Gunasekara</strong>)
           </span>
         </div>
       </div>
