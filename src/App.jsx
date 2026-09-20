@@ -53,6 +53,23 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab]);
 
+  // Sync text size scale with root CSS variable
+  useEffect(() => {
+    document.documentElement.style.setProperty('--font-scale', textSize);
+  }, [textSize]);
+
+  // Sync high contrast attribute with document and body
+  useEffect(() => {
+    const isHigh = isAccessibilityView || isHighContrast;
+    if (isHigh) {
+      document.documentElement.setAttribute('data-accessibility', 'true');
+      document.body.setAttribute('data-accessibility', 'true');
+    } else {
+      document.documentElement.removeAttribute('data-accessibility');
+      document.body.removeAttribute('data-accessibility');
+    }
+  }, [isAccessibilityView, isHighContrast]);
+
   const handleStartNewJourney = (destination = 'Future City Hub') => {
     setSelectedDestination(destination);
     setActiveTab('route');
@@ -222,6 +239,8 @@ export function App() {
               selectedMode={selectedMode}
               setSelectedMode={setSelectedMode}
               onSelectTracking={handleSelectTracking}
+              isPlainLanguage={isPlainLanguage}
+              isAccessibilityView={isAccessibilityView || isHighContrast}
             />
           )}
 
@@ -276,6 +295,10 @@ export function App() {
         onClose={() => setIsSettingsOpen(false)}
         isAccessibilityView={isAccessibilityView}
         setIsAccessibilityView={setIsAccessibilityView}
+        isHighContrast={isHighContrast}
+        setIsHighContrast={setIsHighContrast}
+        isPlainLanguage={isPlainLanguage}
+        setIsPlainLanguage={setIsPlainLanguage}
         audioEnabled={audioEnabled}
         setAudioEnabled={setAudioEnabled}
         onOpenAccessibility={() => setIsAccessibilityOpen(true)}
@@ -327,6 +350,8 @@ export function App() {
       <AccessibilityModal
         isOpen={isAccessibilityOpen}
         onClose={() => setIsAccessibilityOpen(false)}
+        isAccessibilityView={isAccessibilityView}
+        setIsAccessibilityView={setIsAccessibilityView}
         isHighContrast={isHighContrast}
         setIsHighContrast={setIsHighContrast}
         isPlainLanguage={isPlainLanguage}

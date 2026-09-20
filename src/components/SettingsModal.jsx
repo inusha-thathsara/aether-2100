@@ -7,6 +7,10 @@ export function SettingsModal({
   onClose,
   isAccessibilityView,
   setIsAccessibilityView,
+  isHighContrast,
+  setIsHighContrast,
+  isPlainLanguage,
+  setIsPlainLanguage,
   audioEnabled,
   setAudioEnabled,
   onOpenAccessibility,
@@ -22,11 +26,14 @@ export function SettingsModal({
   };
 
   const toggleAccessibility = () => {
-    const next = !isAccessibilityView;
+    const next = !(isAccessibilityView || isHighContrast);
     setIsAccessibilityView(next);
+    if (setIsHighContrast) setIsHighContrast(next);
     audioManager.playChime('click');
     if (next) {
       audioManager.speak("High contrast accessibility view activated.");
+    } else {
+      audioManager.speak("High contrast accessibility view deactivated.");
     }
   };
 
@@ -53,19 +60,46 @@ export function SettingsModal({
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <Eye size={20} color="var(--electric-cyan)" />
             <div>
-              <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff' }}>Accessibility View</div>
-              <div style={{ fontSize: '0.76rem', color: '#94a3b8' }}>High contrast WCAG AAA & larger indicators</div>
+              <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff' }}>High-Contrast Mode (WCAG AAA)</div>
+              <div style={{ fontSize: '0.76rem', color: '#94a3b8' }}>Pure black canvas & high-visibility borders</div>
             </div>
           </div>
           <div 
-            className={`switch-toggle-hud ${isAccessibilityView ? 'active' : ''}`}
+            className={`switch-toggle-hud ${isAccessibilityView || isHighContrast ? 'active' : ''}`}
             onClick={toggleAccessibility}
             role="switch"
-            aria-checked={isAccessibilityView}
+            aria-checked={isAccessibilityView || isHighContrast}
           >
             <div className="switch-thumb-hud"></div>
           </div>
         </div>
+
+        {/* Plain-Language Toggle */}
+        {setIsPlainLanguage && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span style={{ fontSize: '1.2rem' }}>💡</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff' }}>Plain-Language Mode</div>
+                <div style={{ fontSize: '0.76rem', color: '#94a3b8' }}>Simple, easy-to-follow directions for all travelers</div>
+              </div>
+            </div>
+            <div 
+              className={`switch-toggle-hud ${isPlainLanguage ? 'active' : ''}`}
+              onClick={() => {
+                const next = !isPlainLanguage;
+                setIsPlainLanguage(next);
+                audioManager.playChime('click');
+                if (next) audioManager.speak("Plain language mode activated.");
+                else audioManager.speak("Plain language mode deactivated.");
+              }}
+              role="switch"
+              aria-checked={isPlainLanguage}
+            >
+              <div className="switch-thumb-hud"></div>
+            </div>
+          </div>
+        )}
 
         {/* Audio Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>

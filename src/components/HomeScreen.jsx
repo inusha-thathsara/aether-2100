@@ -24,7 +24,9 @@ export function HomeScreen({
   onOpenNearby,
   selectedMode,
   setSelectedMode,
-  onSelectTracking
+  onSelectTracking,
+  isPlainLanguage = false,
+  isAccessibilityView = false
 }) {
   const [destinationQuery, setDestinationQuery] = useState('');
 
@@ -53,7 +55,11 @@ export function HomeScreen({
           {/* Top Header: WHERE ARE YOU GOING? + Settings Cog */}
           <div className="home-header-row">
             <h1 className="home-main-title">
-              WHERE ARE<br />YOU GOING?
+              {isPlainLanguage ? (
+                <>WHERE WOULD<br />YOU LIKE TO GO?</>
+              ) : (
+                <>WHERE ARE<br />YOU GOING?</>
+              )}
             </h1>
             <button
               type="button"
@@ -76,7 +82,7 @@ export function HomeScreen({
             <input
               type="text"
               className="search-input-field"
-              placeholder="Enter Destination"
+              placeholder={isPlainLanguage ? "Type your destination here..." : "Enter Destination"}
               value={destinationQuery}
               onChange={(e) => setDestinationQuery(e.target.value)}
               onKeyDown={(e) => {
@@ -86,6 +92,14 @@ export function HomeScreen({
               aria-label="Enter Destination"
             />
           </div>
+
+          {/* Plain-Language Assistance Banner */}
+          {(isPlainLanguage || isAccessibilityView) && (
+            <div style={{ background: 'rgba(0, 240, 255, 0.08)', border: '1.5px solid var(--electric-cyan)', borderRadius: '12px', padding: '10px 14px', fontSize: '0.82rem', color: '#ffffff', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>💡</span>
+              <span><strong>Easy Guide:</strong> Pick a ride below (Air, Bus, Train, or Road), then tap <strong>New Journey</strong>.</span>
+            </div>
+          )}
 
           {/* 4 Transport Mode Selectors in a Row */}
           <div className="mode-selector-grid" role="group" aria-label="Transport Mode Selection">
