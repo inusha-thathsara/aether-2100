@@ -1,66 +1,68 @@
 import React from 'react';
-import { Compass, GitBranch, Radio, Bot } from 'lucide-react';
+import { Home, ArrowLeftRight, Radio, Settings } from 'lucide-react';
 import { audioManager } from '../utils/audioCues';
 
-export function Navigation({ activeTab, setActiveTab, onOpenCoPilot }) {
-  const handleTabChange = (tab) => {
+export function Navigation({ activeTab, setActiveTab, onOpenSettings }) {
+  const handleTabClick = (tab) => {
     audioManager.playChime('click');
-    setActiveTab(tab);
+    if (tab === 'settings') {
+      onOpenSettings();
+    } else {
+      setActiveTab(tab);
+    }
   };
 
   return (
-    <nav className="bottom-dock-nav" role="navigation" aria-label="Main Navigation">
-      {/* Screen 1: Home & Discovery */}
+    <nav className="phone-bottom-nav-dock" role="navigation" aria-label="Main Navigation">
+      {/* Tab 1: Home Screen */}
       <button
         type="button"
-        className={`nav-tab-btn ${activeTab === 'home' ? 'active' : ''}`}
-        onClick={() => handleTabChange('home')}
+        className={`dock-tab-item ${activeTab === 'home' ? 'active' : ''}`}
+        onClick={() => handleTabClick('home')}
+        title="Home Screen"
+        aria-label="Home"
         id="nav-tab-home"
-        aria-label="Home and Route Discovery"
       >
-        <Compass size={20} />
-        <span>Discovery</span>
+        <Home size={22} strokeWidth={2.4} />
       </button>
 
-      {/* Screen 2: Journey Details */}
+      {/* Tab 2: Journey Details */}
       <button
         type="button"
-        className={`nav-tab-btn ${activeTab === 'route' ? 'active' : ''}`}
-        onClick={() => handleTabChange('route')}
-        id="nav-tab-route"
-        aria-label="Journey Route Details"
+        className={`dock-tab-item ${activeTab === 'route' ? 'active' : ''}`}
+        onClick={() => handleTabClick('route')}
+        title="Journey Details & Route"
+        aria-label="Journey Details"
+        id="nav-tab-journey"
       >
-        <GitBranch size={20} />
-        <span>Journey</span>
+        <ArrowLeftRight size={22} strokeWidth={2.4} />
       </button>
 
-      {/* Screen 3: Live Tracking */}
+      {/* Tab 3: Live Radar HUD Tracking */}
       <button
         type="button"
-        className={`nav-tab-btn ${activeTab === 'tracking' ? 'active' : ''}`}
-        onClick={() => handleTabChange('tracking')}
+        className={`dock-tab-item ${activeTab === 'tracking' ? 'active' : ''}`}
+        onClick={() => handleTabClick('tracking')}
+        title="Live Radar HUD"
+        aria-label="Live Radar HUD"
         id="nav-tab-tracking"
-        aria-label="Live Map and Vehicle Tracking"
       >
-        <Radio size={20} />
-        <span>Live HUD</span>
-        <span className="live-radar-dot" aria-hidden="true"></span>
+        <Radio size={22} strokeWidth={2.4} />
       </button>
 
-      {/* Bonus / Extra: AI Co-Pilot */}
+      {/* Tab 4: Settings & Accessibility */}
       <button
         type="button"
-        className="nav-tab-btn"
-        onClick={() => {
-          audioManager.playChime('click');
-          onOpenCoPilot();
-        }}
-        id="nav-tab-copilot"
-        aria-label="Oracle AI Assistant"
+        className="dock-tab-item"
+        onClick={() => handleTabClick('settings')}
+        title="Settings & Accessibility"
+        aria-label="Settings"
+        id="nav-tab-settings"
       >
-        <Bot size={20} />
-        <span>Oracle AI</span>
+        <Settings size={22} strokeWidth={2.4} />
       </button>
     </nav>
   );
 }
+
+export default Navigation;

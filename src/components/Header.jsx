@@ -26,7 +26,7 @@ export function Header({
           <span className="pulse-dot" aria-hidden="true"></span>
           <span>NEO-METROPOLIS • SECTOR 04 ACTIVE</span>
         </div>
-        <span className="team-tag">CRE8X • IT GUNASEKARA</span>
+        <span className="team-tag">PASSENGER: IT GUNASEKARA</span>
       </div>
 
       <div className="header-main-bar">

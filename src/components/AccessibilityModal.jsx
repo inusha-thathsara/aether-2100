@@ -57,7 +57,7 @@ export function AccessibilityModal({
         </div>
 
         <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-          Cre8x 3.0 prioritizes genuine inclusion for elderly, disabled, and first-time travelers. Customize your experience below:
+          Aether 2100 prioritizes genuine universal inclusion for elderly, disabled, and first-time travelers. Customize your experience below:
         </p>
 
         {/* 1. Plain-Language Translation Toggle */}

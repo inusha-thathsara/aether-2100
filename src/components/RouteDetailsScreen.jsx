@@ -1,244 +1,321 @@
 import React from 'react';
 import { 
-  Clock, 
-  MapPin, 
-  ArrowRight, 
   Bus, 
   Train, 
   Plane, 
-  Car, 
-  Footprints, 
-  AlertCircle, 
-  CheckCircle2, 
-  Radio, 
-  Ticket, 
-  Volume2, 
-  Sparkles,
-  Accessibility,
-  ArrowUpRight
+  Route as RoadIcon, 
+  ArrowDown, 
+  Info,
+  Clock,
+  Compass,
+  CheckCircle,
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import { audioManager } from '../utils/audioCues';
 
 export function RouteDetailsScreen({ 
-  selectedRoute, 
-  setActiveTab, 
-  isPlainLanguage, 
-  setIsPassModalOpen 
+  onSelectTracking,
+  isAccessibilityView,
+  setIsAccessibilityView,
+  selectedMode,
+  setSelectedMode,
+  destination = 'Future City Hub',
+  isPlainLanguage = false
 }) {
-  const getModeIcon = (modeId, size = 18) => {
-    switch (modeId) {
-      case 'bus': return <Bus size={size} />;
-      case 'train': return <Train size={size} />;
-      case 'air': return <Plane size={size} />;
-      case 'road': return <Car size={size} />;
-      default: return <Sparkles size={size} />;
+  const toggleAccessibility = () => {
+    const next = !isAccessibilityView;
+    audioManager.playChime('click');
+    setIsAccessibilityView(next);
+    if (next) {
+      audioManager.speak("Accessibility view enabled. High contrast borders and expanded readability active.");
     }
   };
 
-  const getModeColor = (modeId) => {
-    switch (modeId) {
-      case 'bus': return 'var(--teal-glow)';
-      case 'train': return 'var(--emerald-active)';
-      case 'air': return 'var(--solar-amber)';
-      case 'road': return 'var(--violet-iris)';
-      default: return 'var(--teal-glow)';
-    }
-  };
-
-  const handleLaunchTracking = () => {
+  const handleCardClick = (legName) => {
     audioManager.playChime('arrival');
-    setActiveTab('tracking');
-  };
-
-  const speakSummary = () => {
-    const text = isPlainLanguage
-      ? `This route takes ${selectedRoute.totalDuration}. ${selectedRoute.plainSummary}`
-      : `Your multi-modal corridor from ${selectedRoute.from} to ${selectedRoute.to} is on schedule. Total duration is ${selectedRoute.totalDuration}. All interchanges feature automated step-free boarding ramps.`;
-    audioManager.speak(text);
+    onSelectTracking();
   };
 
   return (
-    <div className="screen-content" role="region" aria-label="Route and Journey Details">
-      {/* Screen 2 Hero Summary Card (High Information Hierarchy) */}
-      <section className="route-hero-card">
-        <div className="route-hero-top">
-          <span className="route-tag-pill">{selectedRoute.name}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--emerald-active)', fontSize: '0.78rem', fontWeight: 700 }}>
-            <CheckCircle2 size={15} />
-            <span>{selectedRoute.status}</span>
-          </div>
-        </div>
+    <div className="route-screen" role="region" aria-label="Journey Route Details">
+      <div className="split-dashboard-layout">
+        {/* LEFT COLUMN: THE EXACT SCREEN 2 FROM CRE8X 3.0 MOCKUP */}
+        <div className="mobile-view-card">
+          {/* Top Header Title */}
+          <h1 className="route-main-title">
+            JOURNEY TO<br />{destination ? destination.toUpperCase() : 'FUTURE CITY HUB'}
+          </h1>
 
-        <div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontFamily: 'var(--font-data)', fontWeight: 600 }}>
-            Total Journey Duration
-          </div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginTop: '2px' }}>
-            <span className="duration-big">{selectedRoute.totalDuration}</span>
-            <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>• {selectedRoute.totalDistance} total</span>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-pure)' }}>
-          <MapPin size={18} color="var(--teal-glow)" />
-          <span>{selectedRoute.from}</span>
-          <ArrowRight size={16} color="var(--text-dim)" />
-          <span>{selectedRoute.to}</span>
-        </div>
-
-        {/* Critical Information Meta Strip */}
-        <div className="route-meta-strip">
-          <div className="meta-item">
-            <span className="meta-item-label">Crowd Density</span>
-            <span className="meta-item-val" style={{ color: 'var(--emerald-active)' }}>Low (32%)</span>
-          </div>
-          <div className="meta-item">
-            <span className="meta-item-label">Clean Energy</span>
-            <span className="meta-item-val">0.0 kg CO2</span>
-          </div>
-          <div className="meta-item">
-            <span className="meta-item-label">Transit Modes</span>
-            <span className="meta-item-val">
-              {selectedRoute.legs.filter(l => !l.isTransfer).length} Seamless Legs
-            </span>
-          </div>
-        </div>
-
-        {/* Read Aloud Button */}
-        <button 
-          type="button" 
-          className="btn-secondary-hud" 
-          onClick={speakSummary}
-          style={{ width: '100%', fontSize: '0.8rem', padding: '10px 14px' }}
-          aria-label="Read journey overview aloud"
-        >
-          <Volume2 size={16} /> Listen to Journey Briefing
-        </button>
-      </section>
-
-      {/* Real-Time Air & Ground Corridor Safety Box */}
-      <section 
-        className="card-hud" 
-        style={{ 
-          background: 'rgba(16, 185, 129, 0.08)', 
-          border: '1px solid rgba(16, 185, 129, 0.3)',
-          padding: '14px 18px' 
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: 'var(--emerald-active)', fontWeight: 700, fontFamily: 'var(--font-data)' }}>
-          <AlertCircle size={16} />
-          <span>ORACLE SYSTEM: ALL CORRIDORS SYNCHRONIZED</span>
-        </div>
-        <p style={{ fontSize: '0.78rem', color: 'var(--text-lead)', marginTop: '4px', lineHeight: 1.45, margin: '4px 0 0' }}>
-          {isPlainLanguage
-            ? "Your journey is running on time. All transfer gates have automatic ramps and audio guides."
-            : "Dynamic atmospheric shear is nominal. Inductive surface power grid synced at 99.98%."}
-        </p>
-      </section>
-
-      {/* Multi-Modal Journey Legs Timeline */}
-      <section aria-label="Journey Legs Timeline">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-          <span className="elevation-title">Multi-Modal Journey Timeline</span>
-          <span style={{ fontSize: '0.72rem', color: 'var(--teal-glow)', fontFamily: 'var(--font-mono)' }}>
-            AUTOMATED TRANSFERS
-          </span>
-        </div>
-
-        <div className="legs-timeline">
-          {selectedRoute.legs.map((leg, index) => {
-            if (leg.isTransfer) {
-              return (
-                <div key={`transfer-${index}`} className="transfer-card" role="region" aria-label={`Transfer: ${leg.title}`}>
-                  <Footprints size={22} color="var(--solar-amber)" style={{ flexShrink: 0 }} />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--solar-amber)' }}>
-                      {leg.title} ({leg.duration})
+          {/* 3-Card Sequential Timeline */}
+          <div className="timeline-cards-list">
+            {/* CARD 1: Autonomous Bus (Safe Mint #00E676) */}
+            <div className="timeline-row-item">
+              <div className="timeline-step-index">1</div>
+              <div 
+                className="timeline-card-box mint-theme"
+                onClick={() => handleCardClick('Autonomous Bus')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick('Autonomous Bus');
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Leg 1: Autonomous Bus"
+              >
+                <div className="timeline-card-header">
+                  <div className="timeline-card-left">
+                    <div className="mode-circle-badge mint">
+                      <Bus size={22} />
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-lead)', marginTop: '3px' }}>
-                      {isPlainLanguage ? leg.plainInstruction : leg.instruction}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Accessibility size={13} color="var(--emerald-active)" />
-                      <span>{leg.distance} • Level-access moving walkway</span>
+                    <div>
+                      <div className="timeline-mode-name">Autonomous Bus</div>
+                      <div className="timeline-mode-desc">
+                        Line MB-04 • Platform Bay 3<br />
+                        <span style={{ color: 'var(--safe-mint)', fontWeight: 700 }}>Departing in 2 min • Level 0</span>
+                      </div>
                     </div>
                   </div>
+                  <span className="status-pill-badge on-time">
+                    ON TIME
+                  </span>
                 </div>
-              );
-            }
-
-            const modeColor = getModeColor(leg.mode);
-
-            return (
-              <div key={`leg-${leg.legNumber}`} className="leg-card" role="region" aria-label={`Leg ${leg.legNumber}: ${leg.modeName}`}>
-                {/* Leg Header */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: modeColor, fontWeight: 700, fontSize: '0.82rem' }}>
-                    {getModeIcon(leg.mode, 18)}
-                    <span>{leg.modeName}</span>
+                {(isPlainLanguage || isAccessibilityView) && (
+                  <div style={{ marginTop: '8px', fontSize: '0.78rem', color: 'var(--text-main)', background: 'rgba(0, 230, 118, 0.12)', padding: '6px 10px', borderRadius: '8px', borderLeft: '3px solid var(--safe-mint)' }}>
+                    💡 <strong>Easy Guide:</strong> Board Bus #MB-04 at Bay 3. It will drive you automatically to Nexus Central.
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    {leg.departureTime} – {leg.arrivalTime} ({leg.duration})
-                  </div>
-                </div>
-
-                {/* Stations */}
-                <div>
-                  <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-pure)' }}>
-                    {leg.from} ➔ {leg.to}
-                  </div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                    Distance: {leg.distance} • Speed: {leg.telemetry?.speed || '100 km/h'}
-                  </div>
-                </div>
-
-                {/* Critical Boarding Gate / Bay */}
-                <div className="leg-gate-highlight">
-                  <MapPin size={14} />
-                  <span>Boarding at: <strong>{leg.gate}</strong></span>
-                </div>
-
-                {/* Plain-Language Guidance for First-Time / Elderly Users */}
-                <div style={{ fontSize: '0.8rem', color: '#e2e8f0', background: 'rgba(0,0,0,0.35)', padding: '8px 12px', borderRadius: '8px', borderLeft: '3px solid var(--teal-glow)' }}>
-                  💡 {leg.plainInstruction}
-                </div>
-
-                {/* Step-Free & Accessibility Notes */}
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: '8px' }}>
-                  <Accessibility size={14} color="var(--emerald-active)" />
-                  <span>{leg.accessibilityNote}</span>
-                </div>
+                )}
               </div>
-            );
-          })}
+            </div>
+
+            {/* Timeline Connecting Arrow 1 */}
+            <div className="timeline-arrow-connector">
+              <ArrowDown size={18} strokeWidth={2.6} color="var(--safe-mint)" />
+            </div>
+
+            {/* CARD 2: Maglev Train (With Transfer Info) */}
+            <div className="timeline-row-item">
+              <div className="timeline-step-index">2</div>
+              <div 
+                className="timeline-card-box maglev-theme"
+                onClick={() => handleCardClick('Maglev Train')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick('Maglev Train');
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Leg 2: Maglev Train"
+              >
+                <div className="timeline-card-header">
+                  <div className="timeline-card-left">
+                    <div className="mode-circle-badge violet">
+                      <Train size={22} />
+                    </div>
+                    <div>
+                      <div className="timeline-mode-name">Maglev Train</div>
+                      <div className="timeline-mode-desc">
+                        Hyper-Tube Line HT-88<br />
+                        Transfer Route 2L-A
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Transfer info callout */}
+                <div className="transfer-info-callout">
+                  <Info size={15} color="var(--electric-cyan)" style={{ flexShrink: 0 }} />
+                  <span>
+                    <strong>Transfer info:</strong> Your Maglev Train is on the way. Board Platform 03-Mag.
+                  </span>
+                </div>
+                {(isPlainLanguage || isAccessibilityView) && (
+                  <div style={{ marginTop: '8px', fontSize: '0.78rem', color: 'var(--text-main)', background: 'rgba(168, 85, 247, 0.12)', padding: '6px 10px', borderRadius: '8px', borderLeft: '3px solid var(--neon-violet)' }}>
+                    💡 <strong>Easy Guide:</strong> Board Maglev Train #88. Relax for 4 minutes while it speeds through the tube.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Timeline Connecting Arrow 2 */}
+            <div className="timeline-arrow-connector">
+              <ArrowDown size={18} strokeWidth={2.6} color="var(--electric-cyan)" />
+            </div>
+
+            {/* CARD 3: Aero-Shuttle (Warning Amber #FF8300) */}
+            <div className="timeline-row-item">
+              <div className="timeline-step-index">3</div>
+              <div 
+                className="timeline-card-box amber-theme"
+                onClick={() => handleCardClick('Aero-Shuttle')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick('Aero-Shuttle');
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Leg 3: Aero-Shuttle"
+              >
+                <div className="timeline-card-header">
+                  <div className="timeline-card-left">
+                    <div className="mode-circle-badge amber">
+                      <Plane size={22} />
+                    </div>
+                    <div>
+                      <div className="timeline-mode-name">Aero-Shuttle</div>
+                      <div className="timeline-mode-desc">
+                        eVTOL Pod #SK-704 • Deck 18<br />
+                        <span style={{ color: 'var(--warning-amber)', fontWeight: 700 }}>Vertiport Cradle 04 • Altitude 420m</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="status-pill-badge delayed">
+                    DELAYED 5m
+                  </span>
+                </div>
+                {(isPlainLanguage || isAccessibilityView) && (
+                  <div style={{ marginTop: '8px', fontSize: '0.78rem', color: 'var(--text-main)', background: 'rgba(255, 131, 0, 0.12)', padding: '6px 10px', borderRadius: '8px', borderLeft: '3px solid var(--warning-amber)' }}>
+                    💡 <strong>Easy Guide:</strong> Step into Sky-Pod #704. It flies you gently through the air straight to your destination.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Accessibility View Toggle Switch */}
+          <div className="accessibility-view-row">
+            <span className="accessibility-view-label">Accessibility View</span>
+            <div 
+              className={`switch-toggle-hud ${isAccessibilityView ? 'active' : ''}`}
+              onClick={toggleAccessibility}
+              role="switch"
+              aria-checked={isAccessibilityView}
+              tabIndex={0}
+              id="toggle-accessibility-view"
+            >
+              <div className="switch-thumb-hud"></div>
+            </div>
+          </div>
+
+          {/* Screen 2 Mode Selector Dock */}
+          <div className="screen2-mode-dock" role="group" aria-label="Filter Modes">
+            <button
+              type="button"
+              className={`dock-icon-btn ${selectedMode === 'air' ? 'active' : ''}`}
+              onClick={() => {
+                audioManager.playChime('click');
+                setSelectedMode('air');
+              }}
+              aria-label="Air Transport"
+            >
+              <Plane size={20} />
+            </button>
+
+            <button
+              type="button"
+              className={`dock-icon-btn ${selectedMode === 'bus' ? 'active' : ''}`}
+              onClick={() => {
+                audioManager.playChime('click');
+                setSelectedMode('bus');
+              }}
+              aria-label="Autonomous Bus"
+            >
+              <Bus size={20} />
+            </button>
+
+            <button
+              type="button"
+              className={`dock-icon-btn ${selectedMode === 'train' ? 'active' : ''}`}
+              onClick={() => {
+                audioManager.playChime('click');
+                setSelectedMode('train');
+              }}
+              aria-label="Maglev Train"
+            >
+              <Train size={20} />
+            </button>
+
+            <button
+              type="button"
+              className={`dock-icon-btn ${selectedMode === 'road' ? 'active' : ''}`}
+              onClick={() => {
+                audioManager.playChime('click');
+                setSelectedMode('road');
+              }}
+              aria-label="Smart Road"
+            >
+              <RoadIcon size={20} />
+            </button>
+          </div>
         </div>
-      </section>
 
-      {/* Primary Action Buttons */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
-        <button
-          type="button"
-          className="btn-primary-hud"
-          onClick={handleLaunchTracking}
-          id="btn-launch-tracking"
-        >
-          <Radio size={19} />
-          <span>Launch Live 3D Tracking HUD ➔</span>
-        </button>
+        {/* RIGHT COLUMN: DESKTOP ROUTE INTELLIGENCE & TELEMETRY PANEL (VISIBLE ON >= 992px) */}
+        <div className="desktop-intelligence-panel" aria-label="Route Intelligence & Itinerary Stats">
+          <div className="card-glass-desktop">
+            <div className="panel-header-badge">
+              <div className="panel-title">Multi-Modal Journey Summary</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--safe-mint)', fontSize: '0.8rem', fontWeight: 800 }}>
+                <CheckCircle size={16} />
+                <span>SYNCED ITINERARY</span>
+              </div>
+            </div>
 
-        <button
-          type="button"
-          className="btn-secondary-hud"
-          onClick={() => {
-            audioManager.playChime('arrival');
-            setIsPassModalOpen(true);
-          }}
-          id="btn-open-ticket"
-        >
-          <Ticket size={18} />
-          <span>View Holographic Boarding Pass</span>
-        </button>
-      </section>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', margin: '14px 0' }}>
+              <div className="metric-box">
+                <Clock size={18} color="var(--electric-cyan)" />
+                <div className="metric-num" style={{ color: 'var(--electric-cyan)' }}>12m</div>
+                <div className="metric-label">Total Duration</div>
+              </div>
+              <div className="metric-box">
+                <Compass size={18} color="var(--safe-mint)" />
+                <div className="metric-num" style={{ color: 'var(--safe-mint)' }}>33 km</div>
+                <div className="metric-label">Total Distance</div>
+              </div>
+              <div className="metric-box">
+                <Zap size={18} color="var(--warning-amber)" />
+                <div className="metric-num" style={{ color: 'var(--warning-amber)' }}>0.0 kg</div>
+                <div className="metric-label">Clean Grid CO2</div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '16px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '14px', padding: '16px', border: '1px solid var(--border-subtle)' }}>
+              <div style={{ fontWeight: 800, fontSize: '0.94rem', color: '#ffffff', marginBottom: '8px' }}>
+                Transfer Interchanges & Guidance
+              </div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--safe-mint)' }}></span>
+                  <span><strong>Leg 1 → Leg 2:</strong> Nexus Interchange Gate 4-B (Step-Free Elevator, 1 min walk)</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--warning-amber)' }}></span>
+                  <span><strong>Leg 2 → Leg 3:</strong> Skyport Apex Vertiport Cradle 04 (Gravity Pod Lift to Level 18)</span>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              className="btn-primary-cyan-pill"
+              style={{ marginTop: '20px' }}
+              onClick={() => {
+                audioManager.playChime('arrival');
+                onSelectTracking();
+              }}
+            >
+              LAUNCH LIVE 3D HUD TRACKING
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default RouteDetailsScreen;
