@@ -383,11 +383,10 @@ export function LiveTrackingScreen({ onOpenAlternatives, onOpenEmergency, isPlai
             'Est: 12:45 PM • Next Transfer: Nexus Interchange (Platform 03)'
           )}
         </div>
-        <div className="status-card-actions-row" style={{ display: 'flex', gap: '10px', marginTop: '14px' }}>
+        <div className="status-card-actions-row">
           <button
             type="button"
             className="btn-view-alternatives"
-            style={{ flex: 1 }}
             onClick={handleAlternativesClick}
             id="btn-view-alternatives"
             aria-label="View Alternatives"
@@ -406,7 +405,7 @@ export function LiveTrackingScreen({ onOpenAlternatives, onOpenEmergency, isPlai
               aria-label="Emergency SOS Concierge"
               title="Connect to 24/7 Human Transit Concierge"
             >
-              <AlertTriangle size={18} />
+              <AlertTriangle size={17} />
               <span>SOS</span>
             </button>
           )}
